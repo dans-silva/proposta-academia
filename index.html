@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proposta Visto Studio</title>
+<meta name="description" content="Proposta de produção de vídeos para Instagram — Visto Studio">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   EDITE AQUI: cores
+   ========================================================= */
+:root{
+  --bg:#0a0a0b;
+  --bg-2:#131315;
+  --line:#26262a;
+  --text:#f3f1ec;
+  --muted:#9a978f;
+  --accent:#d4ff3a;      /* verde-limão */
+  --accent-ink:#0a0a0b;
+  --hot:#ff5a1f;         /* laranja de apoio */
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:"Inter Tight",system-ui,sans-serif;font-size:17px;line-height:1.55;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+body::before{ /* granulado */
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.06;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1180px,100% - 32px);margin-inline:auto}
+.display{font-family:"Anton",Impact,sans-serif;text-transform:uppercase;letter-spacing:.005em;line-height:.92;font-weight:400}
+.tag{display:inline-flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.tag::before{content:"";width:8px;height:8px;background:var(--accent);border-radius:50%}
+
+/* topo */
+.top{position:sticky;top:0;z-index:40;backdrop-filter:blur(12px);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
+.brand{font-family:"Anton";font-size:22px;letter-spacing:.04em}
+.brand span{color:var(--accent)}
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:15px;padding:13px 22px;border-radius:999px;background:var(--accent);color:var(--accent-ink);transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+.top .btn{padding:9px 16px;font-size:14px}
+
+/* hero */
+.hero{padding:64px 0 40px;position:relative}
+.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:48px;align-items:end}
+.hero h1{font-size:clamp(64px,11vw,168px);margin:22px 0 26px}
+.hero h1 .out{color:transparent;-webkit-text-stroke:2px var(--text)}
+.hero h1 .acc{color:var(--accent)}
+.hero p.lead{font-size:20px;max-width:520px;color:#d8d5ce}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.for{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);display:flex;gap:28px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+.for b{display:block;color:var(--text);font-size:16px}
+
+/* card de vídeo vertical */
+.reel{position:relative;aspect-ratio:9/16;border-radius:22px;overflow:hidden;background:var(--bg-2);border:1px solid var(--line);cursor:pointer;isolation:isolate}
+.reel video{width:100%;height:100%;object-fit:cover;display:block}
+.reel .ph{position:absolute;inset:0;display:none;place-items:center;text-align:center;padding:20px;color:var(--muted);font-size:14px;background:repeating-linear-gradient(135deg,#141416 0 14px,#18181b 14px 28px)}
+.reel.missing .ph{display:grid}
+.reel .shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75),transparent 45%);transition:opacity .3s;pointer-events:none}
+.reel .play{position:absolute;left:50%;top:50%;translate:-50% -50%;width:74px;height:74px;border-radius:50%;background:var(--accent);display:grid;place-items:center;transition:transform .25s,opacity .25s;box-shadow:0 0 0 10px color-mix(in srgb,var(--accent) 22%,transparent)}
+.reel .play svg{width:26px;margin-left:4px;fill:var(--accent-ink)}
+.reel .label{position:absolute;left:16px;right:16px;bottom:14px;font-size:14px;font-weight:600;transition:opacity .3s;pointer-events:none}
+.reel .label small{display:block;font-weight:500;color:#cfccc4;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.reel .snd{position:absolute;top:12px;right:12px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:rgba(0,0,0,.55);padding:6px 10px;border-radius:999px;transition:opacity .3s}
+.reel.playing .play,.reel.playing .shade,.reel.playing .label,.reel.playing .snd{opacity:0}
+.reel.missing .play,.reel.missing .snd{display:none}
+.hero .reel{max-width:340px;margin-left:auto;transform:rotate(2.5deg);box-shadow:0 30px 80px rgba(0,0,0,.6)}
+
+/* faixa */
+.tape{background:var(--accent);color:var(--accent-ink);overflow:hidden;transform:rotate(-1.5deg);margin:40px -20px;border-block:2px solid var(--bg)}
+.tape-in{display:flex;width:max-content;animation:roll 28s linear infinite}
+.tape-in span{font-family:"Anton";font-size:34px;text-transform:uppercase;padding:12px 0;white-space:nowrap}
+@keyframes roll{to{transform:translateX(-50%)}}
+
+/* seções */
+section{padding:90px 0}
+.head{display:grid;grid-template-columns:120px 1fr;gap:24px;margin-bottom:46px;align-items:start}
+.num{font-family:"Anton";font-size:72px;line-height:.8;color:transparent;-webkit-text-stroke:1.5px var(--muted)}
+.head h2{font-size:clamp(42px,6vw,82px)}
+.head p{color:var(--muted);max-width:560px;margin-top:14px;font-size:18px}
+
+/* galeria */
+.gallery{display:flex;flex-wrap:wrap;justify-content:center;gap:18px}
+.gallery .reel{width:calc((100% - 54px) / 4)}
+.gallery .reel:nth-child(4n+2),.gallery .reel:nth-child(4n+4){margin-top:46px}
+
+/* por que */
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.why div{background:var(--bg);padding:34px 28px}
+.why h3{font-family:"Anton";font-size:30px;text-transform:uppercase;margin-bottom:12px;line-height:1}
+.why h3 em{font-style:normal;color:var(--accent)}
+.why p{color:var(--muted)}
+
+/* entrega */
+.deliver{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.item{border:1px solid var(--line);border-radius:22px;padding:30px;display:flex;gap:22px;background:linear-gradient(160deg,var(--bg-2),var(--bg))}
+.item i{font-style:normal;font-family:"Anton";font-size:20px;width:46px;height:46px;flex:none;border-radius:12px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center}
+.item h3{font-size:21px;margin-bottom:6px}
+.item p{color:var(--muted)}
+
+/* processo */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:2px solid var(--text)}
+.step{padding:26px 22px 0 0}
+.step b{font-family:"Anton";font-size:44px;color:var(--accent);display:block;line-height:1;margin-bottom:12px}
+.step h3{font-size:19px;margin-bottom:6px}
+.step p{color:var(--muted);font-size:15px}
+
+/* planos */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch}
+.plan{border:1px solid var(--line);border-radius:24px;padding:32px 28px;display:flex;flex-direction:column;background:var(--bg-2);position:relative}
+.plan.feat{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);transform:translateY(-12px)}
+.plan .badge{position:absolute;top:-13px;left:28px;background:var(--hot);color:#fff;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:999px}
+.plan h3{font-family:"Anton";font-size:34px;text-transform:uppercase;line-height:1}
+.plan .sub{font-size:14px;opacity:.7;margin-top:6px}
+.plan .price{font-family:"Anton";font-size:54px;margin:22px 0 4px;line-height:1}
+.plan .price small{font-family:"Inter Tight";font-size:15px;font-weight:600;opacity:.7}
+.plan ul{list-style:none;margin:20px 0 28px;display:grid;gap:10px;flex:1}
+.plan li{padding-left:26px;position:relative;font-size:15px}
+.plan li::before{content:"";position:absolute;left:0;top:7px;width:14px;height:8px;border-left:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:rotate(-45deg)}
+.plan:not(.feat) li::before{color:var(--accent)}
+.plan .btn{justify-content:center}
+.plan.feat .btn{background:var(--accent-ink);color:var(--accent)}
+.note{color:var(--muted);font-size:14px;margin-top:26px;text-align:center}
+
+/* final */
+.final{text-align:center;padding:120px 0 100px;border-top:1px solid var(--line)}
+.final h2{font-size:clamp(56px,10vw,150px)}
+.final h2 span{color:var(--accent)}
+.final p{color:var(--muted);font-size:19px;max-width:520px;margin:22px auto 34px}
+.final .ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* entrada suave */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+.rv.in{opacity:1;transform:none}
+
+/* responsivo */
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero .reel{margin:10px auto 0;max-width:300px}
+  .gallery .reel{width:calc((100% - 18px) / 2)}
+  .gallery .reel:nth-child(n){margin-top:0}
+  .gallery .reel:nth-child(even){margin-top:46px}
+  .why,.deliver,.plans{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr;row-gap:26px}
+  .plan.feat{transform:none}
+  .head{grid-template-columns:1fr;gap:6px}
+  .num{font-size:52px}
+  section{padding:70px 0}
+}
+@media (max-width:520px){
+  body{font-size:16px}
+  .gallery{gap:12px}
+  .gallery .reel{width:calc((100% - 12px) / 2)}
+  .gallery .reel:nth-child(even){margin-top:28px}
+  .steps{grid-template-columns:1fr}
+  .top .btn{display:none}
+  .tape-in span{font-size:26px}
+}
+@media (prefers-reduced-motion:reduce){.tape-in{animation:none}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand">VISTO<span>.</span>STUDIO</div>
+    <a class="btn wa-link" href="#" target="_blank" rel="noopener">Falar no WhatsApp</a>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<div class="hero">
+  <div class="wrap hero-grid">
+    <div class="rv">
+      <span class="tag">Proposta exclusiva · <span data-academia>Nome da Academia</span></span>
+      <h1 class="display">Sua academia<br><span class="out">merece</span> ser<br><span class="acc">vista.</span></h1>
+      <p class="lead">Vídeos pro Instagram que mostram o treino, a energia e as pessoas da <b data-academia>Nome da Academia</b> — do roteiro à edição final.</p>
+      <div class="ctas">
+        <a class="btn" href="#trabalhos">▶ Ver os vídeos</a>
+        <a class="btn ghost" href="#planos">Ver os planos</a>
+      </div>
+      <div class="for">
+        <div><b>Roteiro</b>ideia e texto</div>
+        <div><b>Gravação</b>na sua academia</div>
+        <div><b>Edição</b>Reels prontos</div>
+      </div>
+    </div>
+    <div class="rv" id="hero-reel"></div>
+  </div>
+</div>
+
+<div class="tape" aria-hidden="true"><div class="tape-in" id="tape"></div></div>
+
+<!-- ================= TRABALHOS ================= -->
+<section id="trabalhos">
+  <div class="wrap">
+    <div class="head rv">
+      <div class="num">01</div>
+      <div>
+        <h2 class="display">Aperta o play.<br>Com som.</h2>
+        <p>Alguns trabalhos feitos pela Visto. Toque em qualquer vídeo para assistir — toque de novo para pausar.</p>
+      </div>
+    </div>
+    <div class="gallery" id="gallery"></div>
+  </div>
+</section>
+
+<!-- ================= POR QUE ================= -->
+<section>
+  <div class="wrap">
+    <div class="head rv">
+      <div class="num">02</div>
+      <div>
+        <h2 class="display">Por que vídeo?</h2>
+        <p>Quem procura academia quer sentir o clima antes de entrar. Foto mostra o espaço; vídeo mostra o que acontece lá dentro.</p>
+      </div>
+    </div>
+    <div class="why rv">
+      <div><h3>Mostra o <em>clima</em></h3><p>O som do treino, a galera, os professores. É isso que convence alguém a fazer a primeira aula.</p></div>
+      <div><h3>Gera <em>confiança</em></h3><p>Aluno real, professor real, estrutura real. A pessoa já chega conhecendo a casa.</p></div>
+      <div><h3>Mantém o perfil <em>vivo</em></h3><p>Conteúdo constante no Instagram, sem você precisar parar o dia pra gravar e editar.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ENTREGA ================= -->
+<section>
+  <div class="wrap">
+    <div class="head rv">
+      <div class="num">03</div>
+      <div>
+        <h2 class="display">O que a gente faz</h2>
+        <p>Você foca na academia. A produção fica com a gente.</p>
+      </div>
+    </div>
+    <div class="deliver">
+      <div class="item rv"><i>01</i><div><h3>Roteiro e ideias</h3><p>Planejamento dos vídeos do mês: aulas, desafios, depoimentos, bastidores e promoções.</p></div></div>
+      <div class="item rv"><i>02</i><div><h3>Gravação na academia</h3><p>A gente vai até vocês e grava treinos, professores, alunos e estrutura.</p></div></div>
+      <div class="item rv"><i>03</i><div><h3>Edição pra Reels</h3><p>Cortes dinâmicos, legendas, trilha e efeitos no formato vertical, prontos pra postar.</p></div></div>
+      <div class="item rv"><i>04</i><div><h3>Identidade visual</h3><p>Textos e elementos com as cores e a logo da academia, pra todo vídeo ter a mesma cara.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROCESSO ================= -->
+<section>
+  <div class="wrap">
+    <div class="head rv">
+      <div class="num">04</div>
+      <div><h2 class="display">Como funciona</h2></div>
+    </div>
+    <div class="steps rv">
+      <div class="step"><b>1</b><h3>Conversa</h3><p>Entendemos o público, as modalidades e o objetivo da academia.</p></div>
+      <div class="step"><b>2</b><h3>Planejamento</h3><p>Montamos as ideias e o calendário de vídeos do mês.</p></div>
+      <div class="step"><b>3</b><h3>Gravação</h3><p>Dia de gravação marcado no melhor horário da academia.</p></div>
+      <div class="step"><b>4</b><h3>Entrega</h3><p>Vídeos editados, revisados com você e prontos pra postar.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PLANOS ================= -->
+<section id="planos">
+  <div class="wrap">
+    <div class="head rv">
+      <div class="num">05</div>
+      <div>
+        <h2 class="display">Planos</h2>
+        <p>Escolha o ritmo de conteúdo que faz sentido pra academia agora.</p>
+      </div>
+    </div>
+    <div class="plans" id="plans"></div>
+    <p class="note" id="plans-note"></p>
+  </div>
+</section>
+
+<!-- ================= FINAL ================= -->
+<div class="final">
+  <div class="wrap rv">
+    <h2 class="display">Bora<br><span>começar?</span></h2>
+    <p>Chama a gente no WhatsApp e marcamos uma conversa rápida pra alinhar tudo.</p>
+    <div class="ctas">
+      <a class="btn wa-link" href="#" target="_blank" rel="noopener">Falar no WhatsApp</a>
+      <a class="btn ghost ig-link" href="#" target="_blank" rel="noopener">Ver o Instagram</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© Visto Studio · Audiovisual</span>
+    <span>Proposta preparada para <span data-academia>Nome da Academia</span></span>
+  </div>
+</footer>
+
+<script>
+/* =========================================================
+   EDITE AQUI: tudo que muda de uma proposta pra outra
+   ========================================================= */
+const CONFIG = {
+  academia: "Nome da Academia",
+  whatsapp: "5581985357559",            // só números, com 55 + DDD
+  mensagemWhatsapp: "Oi! Vi a proposta da Visto e quero conversar.",
+  instagram: "https://instagram.com/visto_studio",
+
+  // Vídeo grande do topo
+  videoDestaque: { arquivo: "videos/pilates-fitdance.mp4", capa: "capas/pilates-fitdance.jpg", titulo: "Pilates & FitDance", tipo: "Academia Gaviões" },
+
+  // Galeria (coloque os .mp4 na pasta /videos e as capas na pasta /capas)
+  videos: [
+    { arquivo: "videos/funcross.mp4",       capa: "capas/funcross.jpg",       titulo: "Funcross Recife na praia",      tipo: "Evento · Gaviões" },
+    { arquivo: "videos/fisiculturista.mp4", capa: "capas/fisiculturista.jpg", titulo: "Campeonato de Fisiculturismo",  tipo: "Evento · Gaviões" },
+    { arquivo: "videos/gavioes-11.mp4",     capa: "capas/gavioes-11.jpg",     titulo: "Aulão ao ar livre",             tipo: "Evento · Gaviões" },
+    { arquivo: "videos/gavioes-19.mp4",     capa: "capas/gavioes-19.jpg",     titulo: "Aulão na praia",                tipo: "Evento · Gaviões" },
+    { arquivo: "videos/gavioes-17.mp4",     capa: "capas/gavioes-17.jpg",     titulo: "Bike indoor",                   tipo: "Aula · Gaviões" },
+    { arquivo: "videos/gavioes-07.mp4",     capa: "capas/gavioes-07.jpg",     titulo: "Aulão de dança",                tipo: "Aula · Gaviões" },
+    { arquivo: "videos/gavioes-04.mp4",     capa: "capas/gavioes-04.jpg",     titulo: "Clima de Copa na academia",     tipo: "Ação · Gaviões" },
+  ],
+
+  faixa: ["Treino", "Energia", "Constância", "Resultado", "Comunidade"],
+
+  planos: [
+    { nome: "Start", sub: "Pra começar a aparecer", preco: "R$ ___", periodo: "/mês",
+      itens: ["4 vídeos por mês", "1 dia de gravação", "Edição para Reels", "Legendas nos vídeos"] },
+    { nome: "Pro", sub: "O mais equilibrado", preco: "R$ ___", periodo: "/mês", destaque: true, selo: "Recomendado",
+      itens: ["8 vídeos por mês", "2 dias de gravação", "Roteiro e planejamento", "Edição para Reels", "Identidade visual nos vídeos"] },
+    { nome: "Elite", sub: "Presença total", preco: "R$ ___", periodo: "/mês",
+      itens: ["12 vídeos por mês", "Gravações semanais", "Roteiro e planejamento", "Edição + motion", "Prioridade nas entregas"] },
+  ],
+  notaPlanos: "Valores e quantidades podem ser ajustados conforme a necessidade da academia.",
+};
+
+/* ---------- daqui pra baixo não precisa mexer ---------- */
+document.title = "Proposta Visto Studio · " + CONFIG.academia;
+document.querySelectorAll("[data-academia]").forEach(el => el.textContent = CONFIG.academia);
+const wa = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(CONFIG.mensagemWhatsapp)}`;
+document.querySelectorAll(".wa-link").forEach(a => a.href = wa);
+document.querySelectorAll(".ig-link").forEach(a => a.href = CONFIG.instagram);
+
+// faixa
+const t = CONFIG.faixa.map(w => `${w} ✦ `).join("");
+document.getElementById("tape").innerHTML = `<span>${t.repeat(4)}</span><span>${t.repeat(4)}</span>`;
+
+// cards de vídeo
+const playIcon = '<svg viewBox="0 0 24 24"><path d="M5 3l16 9-16 9z"/></svg>';
+function reel(v){
+  const el = document.createElement("div");
+  el.className = "reel";
+  el.innerHTML = `
+    <video src="${v.arquivo}" ${v.capa ? `poster="${v.capa}"` : ""} playsinline preload="metadata"></video>
+    <div class="shade"></div>
+    <div class="snd">🔊 Com som</div>
+    <div class="play">${playIcon}</div>
+    <div class="label"><small>${v.tipo}</small>${v.titulo}</div>
+    <div class="ph">Coloque o vídeo em<br><b>${v.arquivo}</b></div>`;
+  const vid = el.querySelector("video");
+  vid.addEventListener("error", () => el.classList.add("missing"));
+  if (!v.capa) vid.addEventListener("loadedmetadata", () => { try { vid.currentTime = 0.1 } catch(e){} });
+  el.addEventListener("click", () => {
+    if (el.classList.contains("missing")) return;
+    if (vid.paused) {
+      document.querySelectorAll(".reel video").forEach(o => { if (o !== vid) { o.pause(); o.closest(".reel").classList.remove("playing"); } });
+      vid.muted = false;
+      vid.play().then(() => el.classList.add("playing")).catch(() => {});
+    } else { vid.pause(); el.classList.remove("playing"); }
+  });
+  vid.addEventListener("ended", () => el.classList.remove("playing"));
+  return el;
+}
+document.getElementById("hero-reel").appendChild(reel(CONFIG.videoDestaque));
+const g = document.getElementById("gallery");
+CONFIG.videos.forEach(v => { const r = reel(v); r.classList.add("rv"); g.appendChild(r); });
+
+// planos
+document.getElementById("plans").innerHTML = CONFIG.planos.map(p => `
+  <div class="plan rv ${p.destaque ? "feat" : ""}">
+    ${p.selo ? `<span class="badge">${p.selo}</span>` : ""}
+    <h3>${p.nome}</h3><div class="sub">${p.sub}</div>
+    <div class="price">${p.preco} <small>${p.periodo}</small></div>
+    <ul>${p.itens.map(i => `<li>${i}</li>`).join("")}</ul>
+    <a class="btn" href="${wa}" target="_blank" rel="noopener">Quero esse</a>
+  </div>`).join("");
+document.getElementById("plans-note").textContent = CONFIG.notaPlanos;
+
+// animação de entrada
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
+document.querySelectorAll(".rv").forEach(el => io.observe(el));
+</script>
+</body>
+</html>
