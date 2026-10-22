@@ -129,6 +129,11 @@ section{padding:90px 0}
 .plan:not(.feat) li::before{color:var(--accent)}
 .plan .btn{justify-content:center}
 .plan.feat .btn{background:var(--accent-ink);color:var(--accent)}
+.plans.two{grid-template-columns:repeat(2,1fr);max-width:860px;margin-inline:auto}
+.incl{max-width:860px;margin:30px auto 0;border:1px dashed var(--line);border-radius:18px;padding:20px 24px;display:flex;flex-wrap:wrap;gap:10px 28px;font-size:15px}
+.incl:empty{display:none}
+.incl b{width:100%;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.incl span::before{content:"✓ ";color:var(--accent);font-weight:700}
 .note{color:var(--muted);font-size:14px;margin-top:26px;text-align:center}
 
 /* final */
@@ -151,7 +156,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   .gallery .reel{width:calc((100% - 18px) / 2)}
   .gallery .reel:nth-child(n){margin-top:0}
   .gallery .reel:nth-child(even){margin-top:46px}
-  .why,.deliver,.plans{grid-template-columns:1fr}
+  .why,.deliver,.plans,.plans.two{grid-template-columns:1fr}
   .steps{grid-template-columns:1fr 1fr;row-gap:26px}
   .plan.feat{transform:none}
   .head{grid-template-columns:1fr;gap:6px}
@@ -185,15 +190,15 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     <div class="rv">
       <span class="tag">Proposta exclusiva · <span data-academia>Nome da Academia</span></span>
       <h1 class="display">Sua academia<br><span class="out">merece</span> ser<br><span class="acc">vista.</span></h1>
-      <p class="lead">Vídeos pro Instagram que mostram o treino, a energia e as pessoas da <b data-academia>Nome da Academia</b> — do roteiro à edição final.</p>
+      <p class="lead">Vídeos curtos e fotos que mostram o treino, a energia e as pessoas da <b data-academia>Nome da Academia</b> — captados toda semana, aí na academia.</p>
       <div class="ctas">
         <a class="btn" href="#trabalhos">▶ Ver os vídeos</a>
         <a class="btn ghost" href="#planos">Ver os planos</a>
       </div>
       <div class="for">
-        <div><b>Roteiro</b>ideia e texto</div>
-        <div><b>Gravação</b>na sua academia</div>
-        <div><b>Edição</b>Reels prontos</div>
+        <div><b>1 visita</b>por semana</div>
+        <div><b>3 vídeos</b>curtos por semana</div>
+        <div><b>Fotos</b>aulas, pessoas e estrutura</div>
       </div>
     </div>
     <div class="rv" id="hero-reel"></div>
@@ -229,7 +234,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     <div class="why rv">
       <div><h3>Mostra o <em>clima</em></h3><p>O som do treino, a galera, os professores. É isso que convence alguém a fazer a primeira aula.</p></div>
       <div><h3>Gera <em>confiança</em></h3><p>Aluno real, professor real, estrutura real. A pessoa já chega conhecendo a casa.</p></div>
-      <div><h3>Mantém o perfil <em>vivo</em></h3><p>Conteúdo constante no Instagram, sem você precisar parar o dia pra gravar e editar.</p></div>
+      <div><h3>Mantém o perfil <em>vivo</em></h3><p>Material novo toda semana pras redes, sem a equipe precisar parar o dia pra gravar.</p></div>
     </div>
   </div>
 </section>
@@ -241,14 +246,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <div class="num">03</div>
       <div>
         <h2 class="display">O que a gente faz</h2>
-        <p>Você foca na academia. A produção fica com a gente.</p>
+        <p>Você foca na academia. A captação (e, se quiser, a edição) fica com a gente.</p>
       </div>
     </div>
     <div class="deliver">
-      <div class="item rv"><i>01</i><div><h3>Roteiro e ideias</h3><p>Planejamento dos vídeos do mês: aulas, desafios, depoimentos, bastidores e promoções.</p></div></div>
-      <div class="item rv"><i>02</i><div><h3>Gravação na academia</h3><p>A gente vai até vocês e grava treinos, professores, alunos e estrutura.</p></div></div>
-      <div class="item rv"><i>03</i><div><h3>Edição pra Reels</h3><p>Cortes dinâmicos, legendas, trilha e efeitos no formato vertical, prontos pra postar.</p></div></div>
-      <div class="item rv"><i>04</i><div><h3>Identidade visual</h3><p>Textos e elementos com as cores e a logo da academia, pra todo vídeo ter a mesma cara.</p></div></div>
+      <div class="item rv"><i>01</i><div><h3>Visita semanal</h3><p>Uma visita por semana, num turno de cerca de 4 horas, no dia e horário de mais movimento.</p></div></div>
+      <div class="item rv"><i>02</i><div><h3>Vídeos curtos</h3><p>3 vídeos verticais por semana, captados durante as aulas e atividades da academia.</p></div></div>
+      <div class="item rv"><i>03</i><div><h3>Fotografia</h3><p>Fotos das atividades, dos professores, dos alunos e da estrutura da academia.</p></div></div>
+      <div class="item rv"><i>04</i><div><h3>Edição e tratamento</h3><p>Na modalidade com edição: vídeos prontos pra publicar e fotos tratadas em formato digital.</p></div></div>
     </div>
   </div>
 </section>
@@ -261,10 +266,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <div><h2 class="display">Como funciona</h2></div>
     </div>
     <div class="steps rv">
-      <div class="step"><b>1</b><h3>Conversa</h3><p>Entendemos o público, as modalidades e o objetivo da academia.</p></div>
-      <div class="step"><b>2</b><h3>Planejamento</h3><p>Montamos as ideias e o calendário de vídeos do mês.</p></div>
-      <div class="step"><b>3</b><h3>Gravação</h3><p>Dia de gravação marcado no melhor horário da academia.</p></div>
-      <div class="step"><b>4</b><h3>Entrega</h3><p>Vídeos editados, revisados com você e prontos pra postar.</p></div>
+      <div class="step"><b>1</b><h3>Conversa</h3><p>Alinhamos as modalidades, os professores e o que a academia quer mostrar.</p></div>
+      <div class="step"><b>2</b><h3>Agenda fixa</h3><p>Definimos o dia da semana e o turno da visita.</p></div>
+      <div class="step"><b>3</b><h3>Captação</h3><p>Vídeos e fotos feitos durante a rotina, sem atrapalhar as aulas.</p></div>
+      <div class="step"><b>4</b><h3>Entrega</h3><p>Arquivos entregues em formato digital: brutos ou editados, conforme a modalidade.</p></div>
     </div>
   </div>
 </section>
@@ -275,11 +280,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     <div class="head rv">
       <div class="num">05</div>
       <div>
-        <h2 class="display">Planos</h2>
-        <p>Escolha o ritmo de conteúdo que faz sentido pra academia agora.</p>
+        <h2 class="display">Modalidades</h2>
+        <p>As duas opções que vocês pediram, lado a lado.</p>
       </div>
     </div>
     <div class="plans" id="plans"></div>
+    <div class="incl rv" id="incl"></div>
     <p class="note" id="plans-note"></p>
   </div>
 </section>
@@ -308,7 +314,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
    EDITE AQUI: tudo que muda de uma proposta pra outra
    ========================================================= */
 const CONFIG = {
-  academia: "Nome da Academia",
+  academia: "Academia FAM",
   whatsapp: "5581985357559",            // só números, com 55 + DDD
   mensagemWhatsapp: "Oi! Vi a proposta da Visto e quero conversar.",
   instagram: "https://instagram.com/visto_studio",
@@ -330,14 +336,14 @@ const CONFIG = {
   faixa: ["Treino", "Energia", "Constância", "Resultado", "Comunidade"],
 
   planos: [
-    { nome: "Start", sub: "Pra começar a aparecer", preco: "R$ ___", periodo: "/mês",
-      itens: ["4 vídeos por mês", "1 dia de gravação", "Edição para Reels", "Legendas nos vídeos"] },
-    { nome: "Pro", sub: "O mais equilibrado", preco: "R$ ___", periodo: "/mês", destaque: true, selo: "Recomendado",
-      itens: ["8 vídeos por mês", "2 dias de gravação", "Roteiro e planejamento", "Edição para Reels", "Identidade visual nos vídeos"] },
-    { nome: "Elite", sub: "Presença total", preco: "R$ ___", periodo: "/mês",
-      itens: ["12 vídeos por mês", "Gravações semanais", "Roteiro e planejamento", "Edição + motion", "Prioridade nas entregas"] },
+    { nome: "Proposta 1", sub: "Captação sem edição", preco: "R$ ___", periodo: "/mês",
+      itens: ["1 visita por semana (turno de ~4h)", "3 vídeos curtos por semana, sem edição", "Fotos das atividades, professores, alunos e estrutura", "Arquivos originais entregues em formato digital"] },
+    { nome: "Proposta 2", sub: "Captação com edição", preco: "R$ ___", periodo: "/mês", destaque: true, selo: "Pronto pra postar",
+      itens: ["1 visita por semana (turno de ~4h)", "3 vídeos curtos editados por semana, prontos pra publicar", "Fotos das atividades, professores, alunos e estrutura", "Fotos tratadas, entregues em formato digital"] },
   ],
-  notaPlanos: "Valores e quantidades podem ser ajustados conforme a necessidade da academia.",
+  // O que está incluso nas duas modalidades (deixe [] pra esconder)
+  inclusos: [],
+  notaPlanos: "Sem legendas, publicação ou gerenciamento das redes sociais, conforme solicitado.",
 };
 
 /* ---------- daqui pra baixo não precisa mexer ---------- */
@@ -382,7 +388,8 @@ const g = document.getElementById("gallery");
 CONFIG.videos.forEach(v => { const r = reel(v); r.classList.add("rv"); g.appendChild(r); });
 
 // planos
-document.getElementById("plans").innerHTML = CONFIG.planos.map(p => `
+const pl=document.getElementById("plans"); if (CONFIG.planos.length===2) pl.classList.add("two");
+pl.innerHTML = CONFIG.planos.map(p => `
   <div class="plan rv ${p.destaque ? "feat" : ""}">
     ${p.selo ? `<span class="badge">${p.selo}</span>` : ""}
     <h3>${p.nome}</h3><div class="sub">${p.sub}</div>
@@ -391,6 +398,7 @@ document.getElementById("plans").innerHTML = CONFIG.planos.map(p => `
     <a class="btn" href="${wa}" target="_blank" rel="noopener">Quero esse</a>
   </div>`).join("");
 document.getElementById("plans-note").textContent = CONFIG.notaPlanos;
+if (CONFIG.inclusos.length) document.getElementById("incl").innerHTML = "<b>Incluso nas duas modalidades</b>" + CONFIG.inclusos.map(i=>`<span>${i}</span>`).join("");
 
 // animação de entrada
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
