@@ -130,7 +130,7 @@ section{padding:90px 0}
 .plan .btn{justify-content:center}
 .plan.feat .btn{background:var(--accent-ink);color:var(--accent)}
 .plans.two{grid-template-columns:repeat(2,1fr);max-width:860px;margin-inline:auto}
-.incl{max-width:860px;margin:30px auto 0;border:1px dashed var(--line);border-radius:18px;padding:20px 24px;display:flex;flex-wrap:wrap;gap:10px 28px;font-size:15px}
+.incl{max-width:none;margin:30px auto 0;border:1px dashed var(--line);border-radius:18px;padding:20px 24px;display:flex;flex-wrap:wrap;gap:10px 28px;font-size:15px}
 .incl:empty{display:none}
 .incl b{width:100%;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .incl span::before{content:"✓ ";color:var(--accent);font-weight:700}
@@ -253,7 +253,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <div class="item rv"><i>01</i><div><h3>Visita semanal</h3><p>Uma visita por semana, num turno de cerca de 4 horas, no dia e horário de mais movimento.</p></div></div>
       <div class="item rv"><i>02</i><div><h3>Vídeos curtos</h3><p>3 vídeos verticais por semana, captados durante as aulas e atividades da academia.</p></div></div>
       <div class="item rv"><i>03</i><div><h3>Fotografia</h3><p>Fotos das atividades, dos professores, dos alunos e da estrutura da academia.</p></div></div>
-      <div class="item rv"><i>04</i><div><h3>Edição e tratamento</h3><p>Na modalidade com edição: vídeos prontos pra publicar e fotos tratadas em formato digital.</p></div></div>
+      <div class="item rv"><i>04</i><div><h3>Edição e tratamento</h3><p>Nos orçamentos 2 e 3: vídeos prontos pra publicar e fotos tratadas em alta resolução.</p></div></div>
     </div>
   </div>
 </section>
@@ -281,7 +281,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <div class="num">05</div>
       <div>
         <h2 class="display">Modalidades</h2>
-        <p>As duas opções que vocês pediram, lado a lado.</p>
+        <p>As duas opções que vocês pediram, mais um pacote pra eventos e ações externas.</p>
       </div>
     </div>
     <div class="plans" id="plans"></div>
@@ -336,13 +336,15 @@ const CONFIG = {
   faixa: ["Treino", "Energia", "Constância", "Resultado", "Comunidade"],
 
   planos: [
-    { nome: "Proposta 1", sub: "Captação sem edição", preco: "R$ ___", periodo: "/mês",
-      itens: ["1 visita por semana (turno de ~4h)", "3 vídeos curtos por semana, sem edição", "Fotos das atividades, professores, alunos e estrutura", "Arquivos originais entregues em formato digital"] },
-    { nome: "Proposta 2", sub: "Captação com edição", preco: "R$ ___", periodo: "/mês", destaque: true, selo: "Pronto pra postar",
-      itens: ["1 visita por semana (turno de ~4h)", "3 vídeos curtos editados por semana, prontos pra publicar", "Fotos das atividades, professores, alunos e estrutura", "Fotos tratadas, entregues em formato digital"] },
+    { nome: "Orçamento 1", sub: "Captação sem edição", preco: "R$ 600", periodo: "/mês",
+      itens: ["1 visita semanal presencial (turno de até 4h)", "3 vídeos curtos por semana, entregues em formato bruto", "Fotos das aulas, alunos, professores e estrutura"] },
+    { nome: "Orçamento 2", sub: "Captação com edição", preco: "R$ 800", periodo: "/mês", destaque: true, selo: "Pronto pra postar",
+      itens: ["1 visita semanal presencial (turno de até 4h)", "3 vídeos curtos por semana, editados e prontos pra publicar", "Fotos tratadas, em alta resolução, formato digital"] },
+    { nome: "Orçamento 3", sub: "Personalizado + cobertura externa", preco: "R$ 1.000", periodo: "/mês",
+      itens: ["Agenda livre, sem limite fixo de 1 visita por semana", "Cobertura de demandas fora do calendário: seminários, aulões na praia e ações externas", "Equipe externa e modelo para chamadas e participação nos conteúdos", "Captação e edição de vídeos + fotos tratadas"] },
   ],
-  // O que está incluso nas duas modalidades (deixe [] pra esconder)
-  inclusos: [],
+  // O que está incluso em todas as modalidades (deixe [] pra esconder)
+  inclusos: ["Equipamentos profissionais de áudio, vídeo e iluminação", "Transporte e deslocamento até Piedade"],
   notaPlanos: "Sem legendas, publicação ou gerenciamento das redes sociais, conforme solicitado.",
 };
 
@@ -398,7 +400,7 @@ pl.innerHTML = CONFIG.planos.map(p => `
     <a class="btn" href="${wa}" target="_blank" rel="noopener">Quero esse</a>
   </div>`).join("");
 document.getElementById("plans-note").textContent = CONFIG.notaPlanos;
-if (CONFIG.inclusos.length) document.getElementById("incl").innerHTML = "<b>Incluso nas duas modalidades</b>" + CONFIG.inclusos.map(i=>`<span>${i}</span>`).join("");
+if (CONFIG.inclusos.length) document.getElementById("incl").innerHTML = "<b>Incluso em todos os orçamentos</b>" + CONFIG.inclusos.map(i=>`<span>${i}</span>`).join("");
 
 // animação de entrada
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
