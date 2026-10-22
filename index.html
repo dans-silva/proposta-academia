@@ -66,8 +66,8 @@ a{color:inherit;text-decoration:none}
 .reel .ph{position:absolute;inset:0;display:none;place-items:center;text-align:center;padding:20px;color:var(--muted);font-size:14px;background:repeating-linear-gradient(135deg,#141416 0 14px,#18181b 14px 28px)}
 .reel.missing .ph{display:grid}
 .reel .shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75),transparent 45%);transition:opacity .3s;pointer-events:none}
-.reel .play{position:absolute;left:50%;top:50%;translate:-50% -50%;width:74px;height:74px;border-radius:50%;background:var(--accent);display:grid;place-items:center;transition:transform .25s,opacity .25s;box-shadow:0 0 0 10px color-mix(in srgb,var(--accent) 22%,transparent)}
-.reel .play svg{width:26px;margin-left:4px;fill:var(--accent-ink)}
+.reel .play{position:absolute;left:50%;top:50%;translate:-50% -50%;width:68px;height:68px;border-radius:50%;background:rgba(255,255,255,.14);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.35);display:grid;place-items:center;transition:transform .25s,opacity .25s}
+.reel .play svg{width:22px;margin-left:3px;fill:#fff}
 .reel .label{position:absolute;left:16px;right:16px;bottom:14px;font-size:14px;font-weight:600;transition:opacity .3s;pointer-events:none}
 .reel .label small{display:block;font-weight:500;color:#cfccc4;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
 .reel .snd{position:absolute;top:12px;right:12px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:rgba(0,0,0,.55);padding:6px 10px;border-radius:999px;transition:opacity .3s}
@@ -88,10 +88,34 @@ section{padding:90px 0}
 .head h2{font-size:clamp(42px,6vw,82px)}
 .head p{color:var(--muted);max-width:560px;margin-top:14px;font-size:18px}
 
-/* galeria */
-.gallery{display:flex;flex-wrap:wrap;justify-content:center;gap:18px}
-.gallery .reel{width:calc((100% - 54px) / 4)}
-.gallery .reel:nth-child(4n+2),.gallery .reel:nth-child(4n+4){margin-top:46px}
+/* palco de vídeos */
+.stage{display:grid;grid-template-columns:minmax(280px,380px) 1fr;gap:56px;align-items:center}
+.phone{position:relative;aspect-ratio:9/16;border-radius:34px;padding:10px;background:linear-gradient(160deg,#2a2a2e,#111113);box-shadow:0 0 0 1px #2e2e33,0 40px 90px rgba(0,0,0,.65),0 0 120px color-mix(in srgb,var(--accent) 10%,transparent)}
+.phone::before{content:"";position:absolute;top:18px;left:50%;translate:-50% 0;width:70px;height:6px;border-radius:9px;background:#000;z-index:3;opacity:.8}
+.screen{position:relative;width:100%;height:100%;border-radius:26px;overflow:hidden;background:#000;cursor:pointer}
+.screen video{width:100%;height:100%;object-fit:cover;display:block}
+.screen .veil{position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(0,0,0,.05),rgba(0,0,0,.45));display:grid;place-items:center;transition:opacity .35s}
+.screen .veil span{width:68px;height:68px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.14);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.35);transition:transform .25s}
+.screen:hover .veil span{transform:scale(1.08)}
+.screen .veil svg{width:22px;margin-left:3px;fill:#fff}
+.screen.playing .veil{opacity:0}
+.mute{position:absolute;right:20px;bottom:20px;z-index:4;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(0,0,0,.45);backdrop-filter:blur(8px);color:#fff;font-size:16px;cursor:pointer}
+.st-side{min-width:0}
+.st-meta small{display:block;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.st-meta h3{font-size:clamp(38px,4.6vw,64px);min-height:2em;display:flex;align-items:flex-end}
+.st-bar{display:flex;align-items:center;justify-content:space-between;margin:22px 0 28px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+.st-count{font-family:"Anton";font-size:22px;color:var(--muted)}
+.st-count b{color:var(--text);font-weight:400}
+.st-nav{display:flex;gap:10px}
+.st-nav button{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--text);font-size:18px;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.st-nav button:hover{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.thumb{position:relative;aspect-ratio:9/16;border-radius:14px;overflow:hidden;cursor:pointer;border:0;padding:0;background:var(--bg-2);outline:2px solid transparent;outline-offset:3px;transition:transform .25s,outline-color .25s,opacity .25s;opacity:.55}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb i{position:absolute;left:8px;top:6px;font-style:normal;font-family:"Anton";font-size:15px;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.7)}
+.thumb:hover{opacity:.9;transform:translateY(-3px)}
+.thumb.on{opacity:1;outline-color:var(--accent)}
+.st-hint{margin-top:18px;font-size:14px;color:var(--muted)}
 
 /* por que */
 .why{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:22px;overflow:hidden}
@@ -153,9 +177,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 @media (max-width:900px){
   .hero-grid{grid-template-columns:1fr}
   .hero .reel{margin:10px auto 0;max-width:300px}
-  .gallery .reel{width:calc((100% - 18px) / 2)}
-  .gallery .reel:nth-child(n){margin-top:0}
-  .gallery .reel:nth-child(even){margin-top:46px}
+  .stage{grid-template-columns:1fr;gap:30px}
+  .phone{width:min(100%,340px);margin-inline:auto}
+  .st-meta{text-align:center}
+  .st-meta h3{justify-content:center;min-height:0}
+  .thumbs{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 4px 10px;margin:0 -16px;padding-inline:16px;scrollbar-width:none}
+  .thumbs::-webkit-scrollbar{display:none}
+  .thumb{flex:0 0 84px;scroll-snap-align:center}
+  .st-hint{text-align:center}
   .why,.deliver,.plans,.plans.two{grid-template-columns:1fr}
   .steps{grid-template-columns:1fr 1fr;row-gap:26px}
   .plan.feat{transform:none}
@@ -165,9 +194,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 }
 @media (max-width:520px){
   body{font-size:16px}
-  .gallery{gap:12px}
-  .gallery .reel{width:calc((100% - 12px) / 2)}
-  .gallery .reel:nth-child(even){margin-top:28px}
+
   .steps{grid-template-columns:1fr}
   .top .btn{display:none}
   .tape-in span{font-size:26px}
@@ -214,10 +241,27 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <div class="num">01</div>
       <div>
         <h2 class="display">Aperta o play.<br>Com som.</h2>
-        <p>Alguns trabalhos feitos pela Visto. Toque em qualquer vídeo para assistir — toque de novo para pausar.</p>
+        <p>Alguns trabalhos feitos pela Visto em academias. Escolha um vídeo e assista com som.</p>
       </div>
     </div>
-    <div class="gallery" id="gallery"></div>
+    <div class="stage rv">
+      <div class="phone">
+        <div class="screen" id="screen">
+          <video id="stv" playsinline preload="metadata"></video>
+          <div class="veil"><span><svg viewBox="0 0 24 24"><path d="M5 3l16 9-16 9z"/></svg></span></div>
+        </div>
+        <button class="mute" id="mute" aria-label="Som">🔊</button>
+      </div>
+      <div class="st-side">
+        <div class="st-meta"><small id="sttipo"></small><h3 class="display" id="sttitle"></h3></div>
+        <div class="st-bar">
+          <div class="st-count"><b id="stn">01</b> / <span id="stt">10</span></div>
+          <div class="st-nav"><button id="prev" aria-label="Anterior">←</button><button id="next" aria-label="Próximo">→</button></div>
+        </div>
+        <div class="thumbs" id="thumbs"></div>
+        <p class="st-hint">Ao terminar, o próximo vídeo começa sozinho.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -380,7 +424,7 @@ function reel(v){
   el.addEventListener("click", () => {
     if (el.classList.contains("missing")) return;
     if (vid.paused) {
-      document.querySelectorAll(".reel video").forEach(o => { if (o !== vid) { o.pause(); o.closest(".reel").classList.remove("playing"); } });
+      pauseOthers(vid);
       vid.muted = false;
       vid.play().then(() => el.classList.add("playing")).catch(() => {});
     } else { vid.pause(); el.classList.remove("playing"); }
@@ -389,8 +433,46 @@ function reel(v){
   return el;
 }
 document.getElementById("hero-reel").appendChild(reel(CONFIG.videoDestaque));
-const g = document.getElementById("gallery");
-CONFIG.videos.forEach(v => { const r = reel(v); r.classList.add("rv"); g.appendChild(r); });
+// palco
+const stv = document.getElementById("stv"), screen = document.getElementById("screen");
+const pad = n => String(n).padStart(2, "0");
+let cur = 0;
+document.getElementById("stt").textContent = pad(CONFIG.videos.length);
+const thumbs = document.getElementById("thumbs");
+CONFIG.videos.forEach((v, i) => {
+  const b = document.createElement("button");
+  b.className = "thumb"; b.setAttribute("aria-label", v.titulo);
+  b.innerHTML = `<img src="${v.capa}" alt="" loading="lazy"><i>${pad(i+1)}</i>`;
+  b.onclick = () => pick(i, true);
+  thumbs.appendChild(b);
+});
+function pauseOthers(keep){
+  document.querySelectorAll("video").forEach(o => { if (o !== keep && !o.paused) { o.pause(); o.closest(".reel")?.classList.remove("playing"); } });
+}
+function pick(i, play){
+  cur = (i + CONFIG.videos.length) % CONFIG.videos.length;
+  const v = CONFIG.videos[cur];
+  stv.src = v.arquivo; stv.poster = v.capa;
+  document.getElementById("sttipo").textContent = v.tipo;
+  document.getElementById("sttitle").textContent = v.titulo;
+  document.getElementById("stn").textContent = pad(cur+1);
+  [...thumbs.children].forEach((t, k) => t.classList.toggle("on", k === cur));
+  const t = thumbs.children[cur];
+  if (thumbs.scrollWidth > thumbs.clientWidth) thumbs.scrollTo({ left: t.offsetLeft - thumbs.clientWidth/2 + t.clientWidth/2, behavior: "smooth" });
+  screen.classList.remove("playing");
+  if (play) { pauseOthers(stv); stv.play().then(() => screen.classList.add("playing")).catch(() => {}); }
+}
+screen.onclick = () => {
+  if (stv.paused) { pauseOthers(stv); stv.play().then(() => screen.classList.add("playing")).catch(() => {}); }
+  else { stv.pause(); screen.classList.remove("playing"); }
+};
+stv.addEventListener("pause", () => screen.classList.remove("playing"));
+stv.addEventListener("ended", () => pick(cur + 1, true));
+document.getElementById("prev").onclick = () => pick(cur - 1, !stv.paused);
+document.getElementById("next").onclick = () => pick(cur + 1, !stv.paused);
+const muteBtn = document.getElementById("mute");
+muteBtn.onclick = e => { e.stopPropagation(); stv.muted = !stv.muted; muteBtn.textContent = stv.muted ? "🔇" : "🔊"; };
+pick(0, false);
 
 // planos
 const pl=document.getElementById("plans"); if (CONFIG.planos.length===2) pl.classList.add("two");
